@@ -20,10 +20,10 @@ class PhotoCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      height: 160,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(10.0),
-      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(5.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,13 +36,12 @@ class PhotoCell extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
-                  image: NetworkImage(
-                      'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360'),
-                  fit: BoxFit.fill),
+                  image: NetworkImage(this.thumbnailUrl), fit: BoxFit.fill),
             ),
-            width: 140,
-            height: 140,
+            width: 152,
+            height: 152,
           ),
+          // 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360'),
           // DecoratedBox(
           //   decoration: BoxDecoration(
           //     borderRadius: BorderRadius.circular(8),
@@ -61,12 +60,15 @@ class PhotoCell extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'id: ${id}',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
                   ),
                 ),
                 SizedBox(height: 4),
                 Flexible(
-                  child: Text(title),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
               ],
             ),

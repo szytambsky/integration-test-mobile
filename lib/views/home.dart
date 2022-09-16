@@ -50,33 +50,47 @@ class _HomeScreenState extends State<HomeScreen> {
                 context.read<HomeBloc>().isFetching = false;
 
                 return Scaffold(
-                  body: SingleChildScrollView(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                        //shrinkWrap: true,
-                        //cacheExtent: 1000,
-                        key: PageStorageKey<String>(
-                            "PreserveScrollPositionHomeScreen"),
-                        itemCount: state.photos.length,
-                        itemBuilder: ((context, index) {
-                          if (index < state.photos.length - 1) {
-                            return PhotoCell(
-                                albumId: state.photos[index].albumId,
-                                id: state.photos[index].id,
-                                title: state.photos[index].title,
-                                url: state.photos[index].url,
-                                thumbnailUrl: state.photos[index].thumbnailUrl);
-                          } else {
-                            //if (!context.read<HomeBloc>().isFetching) {
-                            context.read<HomeBloc>()
-                              ..isFetching = true
-                              ..add(LoadApiEvent());
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          //return Center(child: CircularProgressIndicator());
-                        }),
+                  body: Container(
+                    color: const Color.fromARGB(255, 242, 242, 247),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: SingleChildScrollView(
+                        child: Container(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView.builder(
+                            //shrinkWrap: true,
+                            //cacheExtent: 1000,
+                            key: PageStorageKey<String>(
+                                "PreserveScrollPositionHomeScreen"),
+                            itemCount: state.photos.length,
+                            itemBuilder: ((context, index) {
+                              if (index < state.photos.length - 1) {
+                                return Column(
+                                  children: [
+                                    PhotoCell(
+                                        albumId: state.photos[index].albumId,
+                                        id: state.photos[index].id,
+                                        title: state.photos[index].title,
+                                        url: state.photos[index].url,
+                                        thumbnailUrl:
+                                            state.photos[index].thumbnailUrl),
+                                    Divider()
+                                  ],
+                                );
+                              } else {
+                                //if (!context.read<HomeBloc>().isFetching) {
+                                context.read<HomeBloc>()
+                                  ..isFetching = true
+                                  ..add(LoadApiEvent());
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              //return Center(child: CircularProgressIndicator());
+                            }),
+                          ),
+                        ),
                       ),
                     ),
                   ),

@@ -22,7 +22,7 @@ class PhotoCell extends StatelessWidget {
     return Container(
       height: 160,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(5.0),
+      margin: EdgeInsets.symmetric(horizontal: 12.0),
       padding: EdgeInsets.all(5.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

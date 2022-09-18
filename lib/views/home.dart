@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: SingleChildScrollView(
+                        controller: PrimaryScrollController.of(context),
                         child: Container(
                           color: const Color.fromARGB(255, 255, 255, 255),
                           height: MediaQuery.of(context).size.height,

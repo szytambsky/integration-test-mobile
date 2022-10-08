@@ -79,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             state.photos[index].thumbnailUrl),
                                     Divider()
                                   ],
+                                  key: Key('item_${index}'),
                                 );
                               } else {
                                 //if (!context.read<HomeBloc>().isFetching) {

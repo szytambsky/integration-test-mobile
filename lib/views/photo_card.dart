@@ -36,7 +36,7 @@ class PhotoCell extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
-                  image: NetworkImage(this.url), fit: BoxFit.fill),
+                  image: NetworkImage(this.thumbnailUrl), fit: BoxFit.fill),
             ),
             width: 152,
             height: 152,

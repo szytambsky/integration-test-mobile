@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   //final List<Photo> _photos = [];
   //final ScrollController _scrollController = ScrollController();
+  //var scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
               RepositoryProvider.of<PhotoService>(context),
             )..add(LoadApiEvent()),
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              var controller = PrimaryScrollController.of(context);
+              controller!.animateTo(0,
+                  duration: Duration(seconds: 2), curve: Curves.ease);
+            },
+            child: Icon(Icons.arrow_upward),
+          ),
           appBar: AppBar(
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
@@ -56,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: SingleChildScrollView(
                         controller: PrimaryScrollController.of(context),
+                        //controller: scrollController,
                         child: Container(
                           color: const Color.fromARGB(255, 255, 255, 255),
                           height: MediaQuery.of(context).size.height,

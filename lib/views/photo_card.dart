@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:optimized_cached_image/optimized_cached_image.dart';
 
 class PhotoCell extends StatelessWidget {
   final int albumId;
@@ -28,29 +30,50 @@ class PhotoCell extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Container(
-          //   child: ColoredBox(color: Colors.amber),
-          //   width: 180,
-          //   height: 180,
-          // ),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                  image: NetworkImage(this.thumbnailUrl), fit: BoxFit.fill),
-            ),
-            width: 152,
-            height: 152,
-          ),
-          // 'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360'),
-          // DecoratedBox(
           //   decoration: BoxDecoration(
           //     borderRadius: BorderRadius.circular(8),
           //     image: DecorationImage(
-          //         fit: BoxFit.cover,
-          //         image: NetworkImage(
-          //             'https://lh3.googleusercontent.com/ei5eF1LRFkkcekhjdR_8XgOqgdjpomf-rda_vvh7jIauCgLlEWORINSKMRR6I6iTcxxZL9riJwFqKMvK0ixS0xwnRHGMY4I5Zw=s360')),
+          //         image: NetworkImage(this.thumbnailUrl), fit: BoxFit.fill),
+          //   ),
+          //   width: 152,
+          //   height: 152,
+          // ),
+
+          // _sizedContainer(
+          //   CachedNetworkImage(
+          //     imageUrl: this.thumbnailUrl,
+          //     imageBuilder: (context, imageProvider) => Container(
+          //       height: 152,
+          //       width: 152,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.all(Radius.circular(8)),
+          //         image: DecorationImage(
+          //           image: imageProvider,
+          //           fit: BoxFit.cover,
+          //         ),
+          //       ),
+          //     ),
+          //     //placeholder: (context, url) => const CircularProgressIndicator(),
+          //     //errorWidget: (context, url, error) => const Icon(Icons.error),
           //   ),
           // ),
+          _sizedContainer(
+            OptimizedCacheImage(
+              imageUrl: this.thumbnailUrl,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+
           SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -76,10 +99,14 @@ class PhotoCell extends StatelessWidget {
         ],
       ),
     );
-    // return ListTile(
-    //   title: Text('${title}'),
-    //   subtitle: Text('${id}'),
-    // );
+  }
+
+  Widget _sizedContainer(Widget child) {
+    return SizedBox(
+      width: 152.0,
+      height: 152.0,
+      child: Center(child: child),
+    );
   }
 }
 

@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   duration: Duration(seconds: 2), curve: Curves.ease);
             },
             child: Icon(Icons.arrow_upward),
+            key: Key('listFloatingButton'),
           ),
           appBar: AppBar(
             backgroundColor: Colors.white,

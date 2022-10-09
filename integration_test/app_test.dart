@@ -61,26 +61,21 @@ void main() {
       () async {
         print('traceAction started');
 
-        for (var i = 0; i < 22; i++) {
+        for (var i = 0; i < 12; i++) {
           await tester.drag(find.byType(ListView), Offset(0, -1200));
           await tester.pumpAndSettle(const Duration(seconds: 2));
         }
+        await tester.pumpAndSettle();
 
-        //await tester.tapAt(const Offset(20, -20));
+        final floatingButton = find.byKey(const ValueKey("listFloatingButton"));
+        await tester.tap(floatingButton);
+        await tester.pumpAndSettle();
 
-        //await tester.pump();
-        WidgetsBinding.instance!.handlePointerEvent(
-            PointerDownEvent(pointer: 0, position: Offset(20, 20)));
-        WidgetsBinding.instance!.handlePointerEvent(
-            PointerUpEvent(pointer: 0, position: Offset(20, 20)));
-
-        await tester.pump();
-        //await tester.pumpAndSettle(const Duration(seconds: 2));
-
-        for (var i = 0; i < 22; i++) {
+        for (var i = 0; i < 12; i++) {
           await tester.drag(find.byType(ListView), Offset(0, -1200));
           await tester.pumpAndSettle(const Duration(seconds: 2));
         }
+        await tester.pumpAndSettle();
       },
       reportKey: 'scrolling_timeline',
     );
